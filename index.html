@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"> 
+  <title>Color Picker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <script type="text/javascript" src="./node_modules/vue/dist/vue.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="./main.css">
+</head>
+<body>
+  <div id="app" class="container">
+    <h1 class="ml-3"> Color Picker </h1>
+    <div class="row">
+      <div class="col-5">
+        <div class="col-12">
+          <hr />
+          <div class="form-group">
+            <label>Rouge :</label>
+            <input class="form-control" type="number" min="0" max="255" v-model="red"/>
+          </div>
+          <div class="form-group">
+            <label>Vert : </label>
+            <input class="form-control" min="0" max="255" type="number" v-model="green"/>
+          </div>
+          <div class="form-group">
+            <label>Bleu : </label>
+            <input class="form-control" min="0" max="255" type="number" v-model="blue"/>
+          </div>
+          <div class="col-12 p-1">
+            <button class="btn btn-success mt-1" @click="saveSquare" @click="checkForm">Sauvegarder</button>
+            <button class="btn btn-danger mt-1" @click="reset">Annuler</button>
+          </div>
+          <hr />
+          <h3 v-if="nbOfSquares"> 
+            Nombre de carrés : {{ nbOfSquares }}
+            <hr />
+          </h3>
+          <div class="col-12" v-if="nbOfSquares">
+            <div class="prevsquare" v-for="square in squares" :style="{ backgroundColor: square }" @click="selectedSquare=square"></div>
+          </div>
+          <h4 v-else> Ajouter des couleurs !</h4>
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="square mx-auto" :style="{ backgroundColor : selectedSquare }"></div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="index.js"></script>
+</body>
+</html>
