@@ -15,22 +15,23 @@
       <div class="col-5">
         <div class="col-12">
           <hr />
-          <div class="form-group">
-            <label>Rouge :</label>
-            <input class="form-control" type="number" min="0" max="255" v-model="red"/>
-          </div>
-          <div class="form-group">
-            <label>Vert : </label>
-            <input class="form-control" min="0" max="255" type="number" v-model="green"/>
-          </div>
-          <div class="form-group">
-            <label>Bleu : </label>
-            <input class="form-control" min="0" max="255" type="number" v-model="blue"/>
-          </div>
-          <div class="col-12 p-1">
-            <button class="btn btn-success mt-1" @click="saveSquare" @click="checkForm">Sauvegarder</button>
-            <button class="btn btn-danger mt-1" @click="reset">Annuler</button>
-          </div>
+          <form @submit.prevent=submitForm>
+            <div class="form-group">
+              <label>Rouge :</label>
+              <input class="form-control" type="number" min="0" max="255" v-model="form.red"/>
+            </div>
+            <div class="form-group">
+              <label>Vert : </label>
+              <input class="form-control" min="0" max="255" type="number" v-model="form.green"/>
+            </div>
+            <div class="form-group">
+              <label>Bleu : </label>
+              <input class="form-control" min="0" max="255" type="number" v-model="form.blue"/>
+            </div>
+            <button type="submit" class="btn btn-success mt-1">Sauvegarder</button>
+          </form>
+          <button class="btn btn-danger mt-1" @click="reset">Annuler</button>
+        
           <hr />
           <h3 v-if="nbOfSquares"> 
             Nombre de carrés : {{ nbOfSquares }}

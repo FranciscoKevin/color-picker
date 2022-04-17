@@ -1,29 +1,49 @@
 new Vue({
     el:'#app',
     data: {
-        red: 0,
-        green: 0,
-        blue: 0,
+        form: {
+            red: 0,
+            green: 0,
+            blue: 0
+        },
         squares: [],
         selectedSquare: '',
         errors: []
     },
     methods: {
-        resetColor () {
-            this.red = this.green = this.blue = 0
+        submitForm(e) {
+            e.preventDefault()
+            if (this.checkForm()) {
+                this.saveSquare()
+            } else {
+                this.resetColor()
+            }
+        },
+        resetColor() {
+            this.form.red = this.form.green = this.form.blue = 0
         },
         saveSquare () {
-            this.squares.push(`rgb(${this.red}, ${this.green}, ${this.blue})`)
-        resetColor()
+            this.squares.push(`rgb(${this.form.red}, ${this.form.green}, ${this.form.blue})`)
+            this.resetColor()
         },
-        reset () {
+        reset() {
             this.squares = []
-            resetColor()
+            this.resetColor()
         },
-        checkForm () {
-            if (this.red < 0 || this.red > 255) {
-                alert("Vos valeurs doivent être comprise en 0 et 255")
+        checkForm() {
+            this.errors = []
+            if (this.form.red < 0 || this.red > 255) {
+                this.errors.push('La valeur doit etre compris en 0 et 255')
+            } 
+            
+            if (this.form.green < 0 || this.form.green > 255) {
+                this.errors.push('La valeur doit etre compris en 0 et 255')
             }
+
+            if (this.form.blue < 0 || this.form.blue > 255) {
+                this.errors.push('La valeur doit etre compris en 0 et 255')
+            }
+            return this.errors.length ? false : true;
         }
     },
     computed: {
